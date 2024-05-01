@@ -1,4 +1,4 @@
-npm_module
+node_modules
 DS_STORE
 .env
-packagelock.js
+package-lock.json

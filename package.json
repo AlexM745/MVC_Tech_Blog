@@ -1,0 +1,28 @@
+{
+  "name": "mvc_tech_blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexM745/MVC_Tech_Blog.git"
+  },
+  "author": "Alexis Merino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexM745/MVC_Tech_Blog/issues"
+  },
+  "homepage": "https://github.com/AlexM745/MVC_Tech_Blog#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "express.js": "^1.0.0",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.3"
+  }
+}
