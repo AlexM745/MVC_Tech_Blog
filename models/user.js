@@ -11,4 +11,12 @@ User.init({
         allowNull: false,
         unique: true
     },
+    // adding the column for password
+    password: {
+        type: Datatypes.STRING,
+        allowNull: false,
+        validate:{
+            len:[8]
+        }
+    },
 })
