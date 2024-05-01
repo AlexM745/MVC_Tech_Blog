@@ -1,7 +1,7 @@
 // importing sequelize connection, model and dataypes from sequelize 
 const { Model, Datatypes } = require("sequelize");
 const sequelize = require('../config/connection');
-// the user is the superclass and the model the subclass that is inheriting.
+// the user is the subclass that is inheriting and the model the superclass .
 class User extends Model { }
 
 User.init({
@@ -20,3 +20,6 @@ User.init({
         }
     },
 })
+
+// exports the User model
+module.exports = User;
