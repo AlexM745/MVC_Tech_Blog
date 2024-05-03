@@ -8,7 +8,7 @@ Blog.init({
     // added the title column
     title: {
         type: DataTypes.STRING, 
-        allowNull:false;
+        allowNull:false
     },
     // added the content column
     content: {
