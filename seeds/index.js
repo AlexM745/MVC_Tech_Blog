@@ -83,4 +83,4 @@ const Seeds = async () => {
     }
 }
 // calls the function so that they seeds are created
-Seeds()
+Seeds();
