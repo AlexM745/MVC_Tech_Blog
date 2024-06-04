@@ -1,53 +1,71 @@
 // importing express and router
-const express = require("express");
-//imporiting express as a router
-const router = express.Router();
+const express = require("express").Router();
 // importing the models to use database information for routes
-const { User, Blog, Comment } = require("../../models");
+const { User } = require("../../models");
 // importing bcrypt to import and hash passwords
-const bcrypt = require("bcrypt");
+const withauth = require("../../util/auth");
 
+// ("api/user")
 // Post request, creates a new user and the user id and logged in state is saved to the session
 router.post("/", async (req, res) => {
     try {
         const userData = await User.create(req.body);
-        req.session.save(()=>{
+        req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.login_in = true;
 
             res.status(200).json(userData);
         });
-    }catch (err) {
+    } catch (err) {
         res.status(400).json(err);
     }
 });
 
+// ("api/user/login")
 //POST to check if the user information matches the data base and logs in the user.Once logged in it saves the user id and logged_in state to session
 router.post("/login", async (req, res) => {
     try {
         const userData = await User.findOne({ where: { email: req.body.email } });
         if (!userData) {
-            res.status(400).json({message:"Incorrect email or password, try again"})
+            res.status(400).json({ message: "Incorrect email or password, try again" })
             return;
         }
-
+        //check password
         const validPassword = await userData.checkPassword(req.body.password);
         if (!validPassword) {
-            res.status(400).json({message:"Incorrect email or password, try again"})
+            res.status(400).json({ message: "Incorrect email or password, try again" })
             return;
         }
-
-        req.session.save(()=>{
+        //create session and send response back
+        req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.login_in = true;
 
-            res.json({user: userData, message:"You are logged in!!"})
+            res.json({ user: userData, message: "You are logged in!!" })
         });
 
-    }catch (err) {
+    } catch (err) {
         res.status(400).json(err);
     }
 });
 
+// ("api/user")
+// POST to logout, checks the status of the logged_in state and destroys the session.
+router.post('/logout', (req, res) => {
+    try {
+        if (req.session.logged_in) {
+            req.session.destroy(() => {
+                res.status(204).end();
+            });
+        } else {
+            res.status(404).end();
+        }
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+//exports the user route
+module.exports = router;
 
 
