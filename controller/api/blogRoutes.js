@@ -3,7 +3,7 @@ const router = require("express").Router();
 // importing the models
 const { Blog, Comment } = require("../../models");
 // importing auth for help authenticating
-const withauth = require("../../util/auth");
+const withAuth = require("../../util/auth");
 
 // ('/api/blog')
 //POST to create a new blog post
@@ -47,7 +47,7 @@ router.put('/:id', withAuth, async (req, res) => {
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         
-        const blogData = await Blog.destroy({
+        const blogData = await blogData.destroy({
             where: {
                 id: req.params.id,
                 userId: req.session.userId,
@@ -65,3 +65,5 @@ router.delete('/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+module.exports = router;

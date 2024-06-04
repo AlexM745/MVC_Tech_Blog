@@ -1,7 +1,8 @@
 // importing express and router
-const express = require("express").Router();
+const router = require("express").Router();
 // importing the models to use database information for routes
 const { User } = require("../../models");
+const withAuth = require("../../util/auth");
 //  importing auth for help authenticating
 const withauth = require("../../util/auth");
 
@@ -51,7 +52,7 @@ router.post("/login", async (req, res) => {
 
 // ("api/user")
 // POST to logout, checks the status of the logged_in state and destroys the session.
-router.post('/logout', (req, res) => {
+router.post("/logout", withAuth, (req, res) => {
     try {
         if (req.session.logged_in) {
             req.session.destroy(() => {
