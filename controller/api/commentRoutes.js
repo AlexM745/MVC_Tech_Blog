@@ -6,14 +6,30 @@ const withAuth = require('../../utils/auth');
 //('api/comment')
 //GET to get all comments
 router.get('/', async (req, res) => {
-    try{ 
-      const dbCommentData = await Comment.findAll({});
-      if (dbCommentData.length === 0) {
-        res.status(404).json({ message: "You have no comment."});
-        return;
-      };
-      res.status(200).json(dbCommentData);
+    try {
+        const commentData = await Comment.findAll({});
+        if (commentData.length === 0) {
+            res.status(404).json({ message: "You have no comment." });
+            return;
+        };
+        res.status(200).json(commentData);
     } catch (err) {
-      res.status(500).json(err);
+        res.status(500).json(err);
     }
-  });
+});
+
+// Get comments from one blog post
+router.get('/:id', async (req, res) => {
+    try {
+        const commentData = await Comment.findAll({
+            where: { id: req.params.id },
+        });
+        if (commentData.length === 0) {
+            res.status(404).json({ message: `The id ${req.params.id} has no comment.` });
+            return;
+        }
+        res.status(200).json(commentData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
