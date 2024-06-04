@@ -19,9 +19,12 @@ Comment.init({
 
 },{
     sequelize, 
-    freezeTableName:true, 
+    //disable the modification of tablenames
+    freezeTableName: true,
+    //use underscore instead of auto camelcase
     underscored: true, 
-    modelName: "comment", 
+    // the model name
+    modelName: "blog", 
 });
 
 // exports the Comment model
