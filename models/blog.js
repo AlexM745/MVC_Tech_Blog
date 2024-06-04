@@ -18,7 +18,7 @@ Blog.init({
 
 },{
     sequelize, 
-    //diable the modification of tablenames
+    //disable the modification of tablenames
     freezeTableName: true,
     //use underscore instead of auto camelcase
     underscored: true, 
