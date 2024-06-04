@@ -33,6 +33,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 //('api/comment')
 // create a commment
 router.post("/", withAuth, async (req, res) => {
@@ -41,8 +42,29 @@ router.post("/", withAuth, async (req, res) => {
             ...req.body, 
             userId: req.session.userId, 
         });
-        res.status(200).json({commentData, success: true});
+        res.status(200).json(commentData);
     }catch (err) {
         res.status(500).json(err);
     }
-})
+});
+
+//("api/comment/:id")
+//DELETE a comment
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        
+        const commentData = await Comment.destroy({
+            where: {id: req.params.id},
+        });
+        if (!commentData) {
+            res.status(404).json({
+                message: "No comment is found with this id"
+            });
+            return;
+        }
+
+        res.status(200).json(commentData);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});

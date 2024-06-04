@@ -55,7 +55,7 @@ router.delete('/:id', withAuth, async (req, res) => {
         });
         if (!blogData) {
             res.status(404).json({
-                message: `No User Id ${req.session.userId} found with id = ${req.params.id}`,
+                message: "No user Id found with id" ,
             });
             return;
         }
