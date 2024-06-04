@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
-
+//('api/comment')
 // Get comments from one blog post
 router.get('/:id', async (req, res) => {
     try {
@@ -33,3 +33,16 @@ router.get('/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+//('api/comment')
+// create a commment
+router.post("/", withAuth, async (req, res) => {
+    try{
+        const commentData = await Comment.create({
+            ...req.body, 
+            userId: req.session.userId, 
+        });
+        res.status(200).json({commentData, success: true});
+    }catch (err) {
+        res.status(500).json(err);
+    }
+})
