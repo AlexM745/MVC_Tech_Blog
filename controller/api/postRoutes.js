@@ -1,7 +1,7 @@
 // importing the express router
 const router = require("express").Router();
 // importing the models
-const {Blog, Comment, User} = require("../../models");
+const {Blog, Comment} = require("../../models");
 // importing auth for help authenticating
 const withauth = require("../../util/auth");
 
@@ -36,6 +36,33 @@ router.put('/:id', withAuth, async (req, res) => {
         res.status(404).json({ message: 'There is no ID for this Blog post' });
         return;
       }  
+      res.status(200).json(blogData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
+//('/api/post/:id')
+//DELETE to delete a blog post
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const commentData = await Comment.destroy({
+            where: { postId: req.params.id },
+        });
+
+      const blogData = await Blog.destroy({
+        where: {
+          id: req.params.id,
+          userId: req.session.userId,
+        },
+      });
+      if (!blogData) {
+        res.status(404).json({
+          message: `No User Id ${req.session.userId} found with id = ${req.params.id}`,
+        });
+        return;
+      }
+  
       res.status(200).json(blogData);
     } catch (err) {
       res.status(500).json(err);
