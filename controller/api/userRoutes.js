@@ -2,7 +2,7 @@
 const express = require("express").Router();
 // importing the models to use database information for routes
 const { User } = require("../../models");
-// importing bcrypt to import and hash passwords
+//  importing auth for help authenticating
 const withauth = require("../../util/auth");
 
 // ("api/user")
