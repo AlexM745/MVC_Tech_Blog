@@ -17,3 +17,27 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+//('/api/post/:id')
+// PUT to update a blog post
+router.put('/:id', withAuth, async (req, res) => {
+    try {
+      const blogData = await Blog.update(
+        {
+          title: req.body.title,
+          content: req.body.content,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+      if (!blogData) {
+        res.status(404).json({ message: 'There is no ID for this Blog post' });
+        return;
+      }  
+      res.status(200).json(blogData);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
