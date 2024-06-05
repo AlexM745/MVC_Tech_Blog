@@ -47,12 +47,12 @@ const blogs = [
 // the information that is goin gto 
 const comments = [
     {
-        body: 'Do you wear pants ?',
+        body: 'Do you live in a pineapple under the sea?',
         blogId: 3,
         userId: 1
     },
     {
-        body: ' Where are you going?',
+        body: 'Where are you going?',
         blogId: 2,
         userId: 2
     },
