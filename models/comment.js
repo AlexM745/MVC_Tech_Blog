@@ -24,7 +24,7 @@ Comment.init({
     //use underscore instead of auto camelcase
     underscored: true, 
     // the model name
-    modelName: "blog", 
+    modelName: "comment", 
 });
 
 // exports the Comment model

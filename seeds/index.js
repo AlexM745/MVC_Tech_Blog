@@ -1,21 +1,21 @@
 // importing squelize and the models to seed the database
-const sequelize = require("../config/connection");
-const { User, Blog, Comment } = require("../models");
+const sequelize = require('../config/connection');
+const { User, Blog, Comment } = require('../models');
 
 
 // information the is going to be seeding from users
 const users = [
     {
-        username: "alexis",
-        password: "pass123"
+        username: 'alexis',
+        password: 'pass123'
     },
     {
-        username: "clari",
-        password: "pass456"
+        username: 'clari',
+        password: 'pass456'
     },
     {
-        username: "bob",
-        password: "pass789"
+        username: 'bob',
+        password: 'pass789'
     }
 ]
 
@@ -23,23 +23,23 @@ const users = [
 // the information that is going to be seeded from blogs
 const blogs = [
     {
-        title: "The First Post",
-        content: "Hello World!",
+        title: 'The First Post',
+        content: 'Hello World!',
         userId: 1
     },
     {
-        title: "The second Post",
-        content: "Logging Off World!",
+        title: 'The second Post',
+        content: 'Logging Off World!',
         userId: 1
     },
     {
-        title: "Bob Post",
-        content: "I am a sponge under the sea",
+        title: 'Bob Post',
+        content: 'I am a sponge under the sea',
         userId: 3
     },
     {
-        title: "Clari post",
-        content: "Don and Dex are my cats",
+        title: 'Clari post',
+        content: 'Don and Dex are my cats',
         userId: 2
     },
 ]
@@ -47,22 +47,22 @@ const blogs = [
 // the information that is goin gto 
 const comments = [
     {
-        body: "Do you wear pants ?",
+        body: 'Do you wear pants ?',
         blogId: 3,
         userId: 1
     },
     {
-        body: " Where are you going?",
+        body: ' Where are you going?',
         blogId: 2,
         userId: 2
     },
     {
-        body: " Hello!",
+        body: 'Hello!',
         blogId: 1,
         userId: 3
     },
     {
-        body: " Those are great cat names!",
+        body: 'Those are great cat names!',
         blogId: 4,
         userId: 1
     },

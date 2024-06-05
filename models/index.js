@@ -1,18 +1,37 @@
 // imporitng the models 
-const User = require("./user");
-const Blog = require("./blog");
-const Comment = require("./comment");
+const User = require("./User");
+const Blog = require("./Blog");
+const Comment = require("./Comment");
 
 // associations for the tables 
 
-User.hasMany(Blog);
-Blog.belongsTo(User);
+User.hasMany(Blog, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+});
 
-Blog.hasMany(Comment);
-Comment.belongsTo(Blog);
+User.hasMany(Comment, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+});
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+Comment.belongsTo(User, {
+    foreignKey: 'userId',
+});
+
+Comment.belongsTo(Blog, {
+    foreignKey: 'blogId',
+});
+
+Blog.belongsTo(User, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+});
+
+Blog.hasMany(Comment, {
+    foreignKey: 'blogId',
+    onDelete: 'CASCADE'
+});
 
 // export the models
 module.exports = {
