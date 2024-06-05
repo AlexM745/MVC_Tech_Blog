@@ -1,4 +1,9 @@
-//importing express and router from express
+const router = require("express").Router();
 
-const express = require("express");
-const router = express.Router();
+const apiRoutes = require("./userRoutes");
+
+
+router.use("/api", apiRoutes);
+
+
+module.exports = router;
