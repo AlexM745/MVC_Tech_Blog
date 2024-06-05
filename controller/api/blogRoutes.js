@@ -3,7 +3,7 @@ const router = require("express").Router();
 // importing the models
 const { Blog, Comment } = require("../../models");
 // importing auth for help authenticating
-const withAuth = require("../../util/auth");
+const withAuth = require("../../utils/auth");
 
 // ('/api/blog')
 //POST to create a new blog post

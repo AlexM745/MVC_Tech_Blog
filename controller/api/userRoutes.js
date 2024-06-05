@@ -2,9 +2,9 @@
 const router = require("express").Router();
 // importing the models to use database information for routes
 const { User } = require("../../models");
-const withAuth = require("../../util/auth");
+const withAuth = require("../../utils/auth");
 //  importing auth for help authenticating
-const withauth = require("../../util/auth");
+const withauth = require("../../utils/auth");
 
 // ("api/user")
 // Post request, creates a new user and the user id and logged in state is saved to the session
