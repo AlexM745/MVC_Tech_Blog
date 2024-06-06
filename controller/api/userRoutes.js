@@ -5,6 +5,7 @@ const { User } = require("../../models");
 const withAuth = require("../../utils/auth");
 //  importing auth for help authenticating
 const withauth = require("../../utils/auth");
+const bcrypt = require("bcrypt");
 
 // ("api/user")
 // Post request, creates a new user and the user id and logged in state is saved to the session
@@ -24,32 +25,34 @@ router.post("/", async (req, res) => {
 
 // ("api/user/login")
 //POST to check if the user information matches the data base and logs in the user.Once logged in it saves the user id and logged_in state to session
-router.post("/login", async (req, res) => {
-    try {
-        const userData = await User.findOne({ where: { email: req.body.email } });
-        if (!userData) {
-            res.status(400).json({ message: "Incorrect email or password, try again" })
-            return;
-        }
-        //check password
-        const validPassword = await userData.checkPassword(req.body.password);
-        if (!validPassword) {
-            res.status(400).json({ message: "Incorrect email or password, try again" })
-            return;
-        }
-        //create session and send response back
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.login_in = true;
-
-            res.json({ user: userData, message: "You are logged in!!" })
-        });
-
-    } catch (err) {
-        res.status(400).json(err);
+router.post("/login", (req, res) => {
+  // find username name that matches request
+    User.findOne({
+      where:{
+      username:req.body.username
     }
+}).then(foundUser=>{
+  // if username is not found, send message
+      if(!foundUser){
+        return res.status(400).json({msg:"wrong login credentials"})
+      }
+      // compare password with saved hash
+      if(bcrypt.compareSync(req.body.password,foundUser.password)){
+        // if pw matches, create session for user 
+        req.session.user = {
+          id:foundUser.id,
+          username:foundUser.username
+        }
+        return res.json(foundUser)
+        // redirect page??
+      } else {
+        return res.status(400).json({msg:"wrong login credentials"})
+      }
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({ msg: "an error occured", err });
+      });
 });
-
 // ("api/user")
 // POST to logout, checks the status of the logged_in state and destroys the session.
 router.post("/logout", withAuth, (req, res) => {
