@@ -1,0 +1,22 @@
+* {
+margin: 0%;
+padding: 0%;
+box-sizing: 0%;
+}
+
+body {
+    height: 100%;
+    background-color: white;
+}
+
+header, h1 {
+    background-color: rgb(18, 155, 34);
+    padding: 2%;
+    color: black;
+}
+
+
+button{
+    padding:2%;
+    margin: 2%;
+}
