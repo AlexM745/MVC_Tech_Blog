@@ -24,7 +24,29 @@ router.get("/", async (req, res) => {
         res.status(500).json(err);
     }
 
-})
+});
+
+router.get("/dashboard", async (req, res) => {
+    try {
+
+
+        const userdata = await User.findByPk(req.session.user.id, {
+            include: [Blog, Comment]
+        });
+
+        if (!req.session.user) {
+            return res.redirect("/login")
+        }
+
+        res.render("dashboard", userdata);
+
+
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+
 
 
 
