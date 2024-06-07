@@ -26,6 +26,16 @@ router.get("/", async (req, res) => {
 
 });
 
+
+// ("/login")
+// GET login page if not logged in send back to dashboard
+router.get("/login",(req,res)=>{
+    if(!req.session.user){
+        return res.redirect("/dashboard")
+    }
+    res.render("login")
+})
+
 router.get("/dashboard", async (req, res) => {
     try {
 
@@ -45,9 +55,6 @@ router.get("/dashboard", async (req, res) => {
         res.status(500).json(err);
     }
 });
-
-
-
 
 
 
