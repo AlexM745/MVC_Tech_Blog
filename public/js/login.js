@@ -43,6 +43,7 @@ const signupFormHandler = async (event) => {
             alert(response.statusText);
         }
     }
+}
 
 // adding event listeners to log in button and sign up button.
     document
