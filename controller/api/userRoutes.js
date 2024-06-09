@@ -4,7 +4,7 @@ const router = require("express").Router();
 const { User } = require("../../models");
 
 
-// ("api/user")
+// ("api/users")
 // Post request, creates a new user and the user id and logged in state is saved to the session
 router.post("/", async (req, res) => {
     try {
@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// ("api/user/login")
+// ("api/users/login")
 //POST to check if the user information matches the data base and logs in the user.Once logged in it saves the user id and logged_in state to session
 router.post("/login", async (req, res) => {
     try {
@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// ("api/user")
+// ("api/users")
 // POST to logout, checks the status of the logged_in state and destroys the session.
 router.post("/logout", (req, res) => {
         if (req.session.logged_in) {
