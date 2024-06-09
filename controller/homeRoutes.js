@@ -68,8 +68,6 @@ router.get("/dashboard", withAuth, async (req, res) => {
     }
 });
 
-
-
 // ("/login")
 // GET login page if not logged in send back to dashboard
 router.get("/login", (req, res) => {
