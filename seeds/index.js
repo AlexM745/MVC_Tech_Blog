@@ -5,15 +5,15 @@ const { User, Blog, Comment } = require('../models');
 
 // information the is going to be seeding from users
 const users = [
-    {
+    {   id: 1,
         username: 'alexis',
         password: 'pass123'
     },
-    {
+    {   id: 2,
         username: 'clari',
         password: 'pass456'
     },
-    {
+    {   id: 3,
         username: 'bob',
         password: 'pass789'
     }
