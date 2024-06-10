@@ -28,7 +28,7 @@ router.get("/blog/:id", async (req, res) => {
             include: [
                 {
                     model: User,
-                    attributes: ['name'],
+                    attributes: ['username'],
                 },
             ],
         });
@@ -52,18 +52,24 @@ router.get("/blog/:id", async (req, res) => {
 router.get("/dashboard", withAuth, async (req, res) => {
     try {
         //finding user based on the session id
-        const userdata = await User.findByPk(req.session.user.id, {
-            attributes: { exclude: ['password'] },
-            include: [Blog, Comment],
+        const blogData = await Blog.findAll({
+            where: {
+                // ID from the session
+                user_id: req.session.user_id,
+            }, include: [                {
+                    model: Comment,include: {model: User,attributes: ['username'],},
+                },
+                {model: User,attributes: ['username']},
+            ],
         });
-
-        const user = userdata.get({plain: true});
+        const blogs = blogData.map((blog) => blog.get({ plain: true }));
 
         res.render("dashboard", {
-            ...user, 
+            ...blogs,
             logged_in: true
         });
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
