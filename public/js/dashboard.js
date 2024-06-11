@@ -1,20 +1,29 @@
-var existingBlogs = document.querySelector("#postedBlogs")
+// section that shows all the users blog posts
+var postedblogs = document.querySelector("#postedBlogs")
+//section that has the title and content for user to fill 
 var createBlog = document.querySelector("#createBlog")
-var createdBlog = document.querySelector("#createdBlog")
-var newBlog = document.querySelector('#newBlog')
 
+var newBlog = document.querySelector("#newBlog")
+// the button to create a new blog post
+var newBlogBtn = document.querySelector('#newBlogBtn')
+
+
+// hiding the create blog section
 function hideCreateBlog() {
-    createdBlog.hidden=true;
+    createBlog.hidden=true;
 }
 hideCreateBlog();
 
-createdBlog.addEventListener("submit",event=>{
+
+// the New Blog button
+newBlogBtn.addEventListener("submit",event =>{
     event.preventDefault()
-    console.log('click')
-    existingBlogs.hidden=true;
-    newBlog.hidden =true;
+    postedblogs.hidden=true;
+    newBlogBtn.hidden =true;
     createBlog.hidden =false;
 });
+
+
 
 newBlog.addEventListener("submit", event => {
     var title = document.querySelector("#title").value;
